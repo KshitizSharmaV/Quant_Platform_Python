@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>ALM Modelling</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Arsenal' rel='stylesheet'>
+
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+</head>
+<body style="font-family:Arsenal">   
+ <div class="container-fluid">
+ <div class="row">
+ 	<div class="col-md-8 col-lg-8 col-sm-12">
+ 	<nav class="navbar navbar-static-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#" style="color:black;font-size: 25px"><b><i>Sigmoid - Quant Analytics Platform</i></b></a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	 	</ul>
+	  </div>
+	</nav> 
+
+	  <h3>The idea is to capitalize on special market events and be prepared by taking positions in Equities, Options or futures markets to maximise from the market swings before everyone. The following goal is achieved by backtesting on such events eg. Political events, Storms or natural disasters, Corporate events, Unforeseen events like trade wars, attacks. To make sure the goals are achieved, quantitative research is done on past events fitting similar critertia and the assets which were most volatile in those events. The research is followed by real time extensive backtesting to incorporate trade costs, market volatility and asset behaviour.</h3>
+	  <h3>Quantitative research methodlogy
+	  <uL>
+	  	<li>Factor/Statistical modelling for assets</li>
+	  	<li>Machine Learning</li>
+	  	<li>Asset behaviors, correlations & arbs</li>
+	  	<li>Hedging and risk analytics</li>
+	  	<li>Arbitrage Opportunities due to market swings</li>
+	  	<li>Amplifying hidden Patterns & Singals</li>
+	  	<li>Sentiment Analysis</li>
+	  	<li>Python/R/Excel/BI tools combination for visualization</li>
+	  </uL>
+	  Qualitative research methodlogy
+	  <uL>
+	  	<li>Study factors causing market moving events</li>
+	  	<li>Financial impact on Balance Sheets</li>
+	  	<li>Current market conditions</li>
+	  	<li>Probability of same market moving events happening again</li>
+	  	<li>Exploring Interest rates, commodities, bonds, equities, options behavior</li>
+	  </uL>
+	</h3>
+	</div>
+	<div class="col-md-4 col-lg-4 col-sm-12" style="background-color: #3b5998;color:white">
+		<nav class="navbar navbar-static-top">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#" style="color:white;font-size: 25px">Events We have discussed</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		 	</ul>
+		  </div>
+		</nav> 
+		<h3>
+			<ul>
+				<li>Amazon buys Wholefoods</li>
+				<li>Hurricane Harvey and Ima</li>
+				<li>Brexit</li>
+				<li>Tesla and Elon musk</li>
+				<li>India attacks Pakistan</li>
+				<li>Las Vegas Shooting</li>
+				<li>US China Trade War</li>
+				<li>Tech events - FB, GOOG data leaks</li>
+			</ul>
+		</h3>
+	</div>
+ </div>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1">NII</a></li>
+    <li><a data-toggle="tab" href="#menu2">MVE Analysis</a></li>
+    <li><a data-toggle="tab" href="#menu3">Duration</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Home</h3>
+      <h4>
+      	<p>Hi, <p>
+      	My name is Kshitiz Sharma, thanks for considering me for the role. I went through the job description and after guessing about what the job role should look like, I built a toy tool for ALM modelling.  
+      	<p>I made this web application over the weekend on a Pyton based platform. The configuration of this platform is as follows:</o>
+      		<ul>
+      			<li>Front End : HTML5, Bootstrapp, CSS, Jquery, Ajax</li>
+      			<li>Backend : Python</li>
+      			<li>Database : Usually I use SQL or pandas</li>
+      		</ul>
+      </h4>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>NII</h3>
+      <form action="/action_page.php">
+		<div class="form-group">
+		    <label for="email">Asset:</label>
+		    <input type="text" class="form-control" id="asset1">
+		</div>
+		<div class="form-group">
+		    <label for="email">Liability:</label>
+		    <input type="text" class="form-control" id="Liability1">
+		</div>
+		<div class="form-group">
+		    <label for="email">:</label>
+		    <input type="text" class="form-control" id="email">
+		</div>
+		<div class="form-group">
+		    <label for="email">:</label>
+		    <input type="text" class="form-control" id="email">
+		</div>
+		<div class="form-group">
+		    <label for="email">:</label>
+		    <input type="text" class="form-control" id="email">
+		</div>
+		  <button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div>
+</div>
+
+
+   </div>
+
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>
+

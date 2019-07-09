@@ -1,0 +1,289 @@
+{% extends 'WebFiles/base.html' %}
+{% load custom_tags %}
+{% block content %}
+<!-- Main Row Content -->          
+<div class="row" style="font-size: 13px">
+	<!-- Metrics table -->	
+		<div class="col-lg-3 col-md-3 col-sm-12">
+			<table class="table">
+				<thead>
+						<tr>
+							<th scope="col">Metrics</th>
+							<th scope="col"></th>
+						</tr>
+				</thead>
+				<tbody>
+						{% for key, value in metrics.items %}
+						<tr>
+							<td>{{key}}</td>
+							<td>{{value }}</td>
+						</tr>
+						{% endfor %}
+				</tbody>
+			</table>
+		</div>		
+	<!-- Metrics table -->			
+
+   	<!-- Time series Chart -->
+     <div class="col-lg-5 col-md-5 col-sm-12">
+        <div id="price_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+          <script>
+          		Highcharts.chart('price_chart', {
+                    chart: {
+                        zoomType: 'x'
+                    },
+                    title: {
+                        text: '{{chart_title_1}}'
+                    },
+                    subtitle: {
+                        text: document.ontouchstart === undefined ?
+                            'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                    },
+                    xAxis: {
+                        type: 'datetime'
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Stock Prices'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        area: {
+                            fillColor: {
+                                linearGradient: {
+                                    x1: 0,
+                                    y1: 0,
+                                    x2: 0,
+                                    y2: 1
+                                },
+                                stops: [
+                                    [0, Highcharts.getOptions().colors[0]],
+                                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                ]
+                            },
+                            marker: {
+                                radius: 2
+                            },
+                            lineWidth: 1,
+                            states: {
+                                hover: {
+                                    lineWidth: 1
+                                }
+                            },
+                            threshold: null
+                        }
+                    },
+
+                    series: [{
+                        type: 'area',
+                        name: 'Time Series for stock price',
+                        data: {{data}}
+                    }]
+                });
+            
+        </script>
+     </div>
+   	<!-- Time series Chart -->
+
+   	<!-- Returns series Chart -->
+     <div class="col-lg-4 col-md-4 col-sm-12">
+        <div id="return_chart"></div>
+          <script>
+          		Highcharts.chart('return_chart', {
+                    chart: {
+                        zoomType: 'x'
+                    },
+                    title: {
+                        text: '{{chart_title_2}}'
+                    },
+                    subtitle: {
+                        text: document.ontouchstart === undefined ?
+                            'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                    },
+                    xAxis: {
+                        type: 'datetime'
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Returns'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        area: {
+                            fillColor: {
+                                linearGradient: {
+                                    x1: 0,
+                                    y1: 0,
+                                    x2: 0,
+                                    y2: 1
+                                },
+                                stops: [
+                                    [0, Highcharts.getOptions().colors[0]],
+                                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                ]
+                            },
+                            marker: {
+                                radius: 2
+                            },
+                            lineWidth: 1,
+                            states: {
+                                hover: {
+                                    lineWidth: 1
+                                }
+                            },
+                            threshold: null
+                        }
+                    },
+
+                    series: [{
+                        type: 'area',
+                        name: 'Time Series for stock price',
+                        data: {{returns_data}}
+                    }]
+                });
+            
+        </script>
+     </div>
+   	<!-- Returns series Chart -->
+ 	
+	<!-- Return Distribution Graph -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+	   		<div id="Return_Distribution_Graph" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	   		<script>
+		   	
+				Highcharts.chart('Return_Distribution_Graph', {
+
+				    title: {
+				        text: 'Returns Distribution'
+				    },
+
+				    xAxis: [{
+				        title: {
+				            text: 'Daily Returns Distribution'
+				        },
+				        alignTicks: false
+				    }, {
+				        title: {
+				            text: 'Daily Returns Distribution'
+				        },
+				        alignTicks: false,
+				        opposite: true
+				    }],
+
+				    yAxis: [{
+				        title: { text: 'Data' }
+				    }, {
+				        title: { text: 'Bell curve' },
+				        opposite: true
+				    }],
+
+				    series: [{
+				        name: 'Bell curve',
+				        type: 'bellcurve',
+				        xAxis: 1,
+				        yAxis: 1,
+				        baseSeries: 1,
+				        zIndex: -1
+				    }, {
+				        name: 'Returns',
+				        type: 'scatter',
+				        data: {{returns}},
+				        visible:false,
+				        marker: {
+				            radius: 1.5
+				        }
+				    }]
+				});
+			</script>   		
+		</div>
+   	<!-- Return Distribution Graph -->
+
+   	<div class="col-md-8 col-lg-8 col-sm-12">
+   			<table class="table">
+   				<thead>
+					<tr>
+						{% for header in time_interval_perform.headers %}
+						    <th>{{ header }}</th>
+						{% endfor %}
+					</tr>
+				</thead>
+				<tbody>
+				<tr>    
+					{% for row in time_interval_perform.rows %}
+					     <tr>
+			                {% for value in row %}
+			                    <td>{{value}}</td>
+			                {% endfor %}
+			            </tr>
+					{% endfor %}
+				</tr>
+				</tbody>
+			</table>
+   	</div>
+   	
+	<!-- Yearly Distribution of returns -->
+		<div class="col-md-8 col-lg-8 col-sm-12">
+			<div id="beeswarm_box_graph"></div>
+            	<script>
+                $(function () {Highcharts.chart('beeswarm_box_graph', {
+                    xAxis: {
+                        categories:{{ bee_swarm_box_plot_yearly|get_item:"bee_plot_years_list"}},
+                    },yAxis: {
+                        title: {
+                            text: 'Stock Returns over years'
+                        }
+                    },
+                    title: {
+                        text: 'CDF Box Plot of returns over years'
+                    },
+                
+                    legend: {
+                        enabled: true
+                    },
+                	 series: [{
+                        type: 'boxplot',
+                        name: 'Observations',
+                        id: 'observ',
+                        data: {{ bee_swarm_box_plot_yearly|get_item:"bee_plot_percentiles"}}
+                        ,
+                    }, {
+                        name: 'scatter',
+                        type: 'scatter',
+                        data: {{ bee_swarm_box_plot_yearly|get_item:"bee_plot_scatter"}},
+                    }]
+
+                    });
+                });
+            </script>
+		</div>
+	<!-- Yearly Distribution of returns -->	
+
+
+	<div class="col-md-3 col-lg-3 col-sm-12">
+		<table class="table">
+				<thead>
+						<tr>
+							<th scope="col">Top peforming technical indicators</th>
+						</tr>
+				</thead>
+				<tbody>
+						{% for value in top_indicators %}
+						<tr>
+							<td>{{value}}</td>
+						</tr>
+						{% endfor %}
+				</tbody>
+			</table>
+	</div>
+
+	
+
+</div>
+<!-- Main Row Content -->
+{% endblock %}

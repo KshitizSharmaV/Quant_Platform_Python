@@ -1,0 +1,156 @@
+{% extends 'WebFiles/base.html' %}
+{% load custom_tags %}
+{% block content %}
+<!-- Main Row Content -->          
+<div class="row">
+	<!-- Options menu -->
+	<div class="col-md-6 col-lg-6 col-sm-12">
+		<table class="table table-striped">
+             <thead>
+				<tr>
+					<th>Data table</th>
+					<th>Metrics</th>
+				</tr>
+			</thead>
+
+              <tbody>
+              	<tr>
+              		<td>Target</td>
+              		<td>{{target_name}}</td>
+              	</tr>
+              	<tr>
+              		<td>Features</td>
+              		<td>
+              			<ul>
+              				{% for values in features_name %}
+              					<li>{{values}}</li>
+              				{% endfor %}	
+              			</ul>
+					</td>
+              	</tr>
+              </tbody>
+         </table>
+	</div>
+	<!-- Options menu -->
+
+	<!-- results menu -->
+	<div class="col-md-6 col-lg-6 col-sm-12">
+		<!-- Scatter Plot -->
+	        <div id="scatter_plot_graph" style="min-width: 310px; max-height: 400px; max-width: 800px; margin: 0 auto"></div>
+                <script>
+                    Highcharts.chart('scatter_plot_graph', {
+                    chart: {
+                        type: 'scatter',
+                        zoomType: 'xy'
+                    },
+                    accessibility: {
+                        description: 'A scatter plot of actual Target Future Returns vs Prediction from OLS Model. We should observer a straight line at 45 Degrees.'
+                    },
+                    title: {
+                        text: 'Actual Target Vs Predicted Target'
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        title: {
+                            enabled: true,
+                            text: 'Predicted Targets'
+                        },
+                        startOnTick: true,
+                        endOnTick: true,
+                        showLastLabel: true
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Actual Targets'
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        x: 100,
+                        y: 70,
+                        floating: true,
+                        backgroundColor: Highcharts.defaultOptions.chart.backgroundColor,
+                        borderWidth: 1
+                    },
+                    plotOptions: {
+                        scatter: {
+                            marker: {
+                                radius: 5,
+                                states: {
+                                    hover: {
+                                        enabled: true,
+                                        lineColor: 'rgb(100,100,100)'
+                                    }
+                                }
+                            },
+                            states: {
+                                hover: {
+                                    marker: {
+                                        enabled: false
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                headerFormat: '<b>{series.name}</b><br>',
+                                pointFormat: '{point.x} cm, {point.y} kg'
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Test',
+                        color: 'rgba(223, 83, 83, .5)',
+                        data: {{linear_regression_results | get_item:"test_target_features"}}
+
+                        }, {
+                        name: 'Train',
+                        color: 'rgba(119, 152, 191, .5)',
+                        data: {{linear_regression_results | get_item:"train_target_features"}}
+                            }]
+                        });
+
+                </script>
+	    <!-- Scatter Plot --> 
+
+	    <!-- Linear Regression -->
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Features</th>
+					<th>P Value</th>
+					<th>Coeff</th>
+				</tr>
+			</thead>
+			<tbody>
+					{% with linear_regression_results.coeff as coeff %}
+						{% for key,value in linear_regression_results.pvalues.items %}
+							<tr>
+								<td>{{key}}</td>
+								<td>{{value}}</td>
+								<td>{{coeff | get_item:key}}</td>
+							</tr>
+						{% endfor %}
+					{% endwith %}
+			</tbody>
+		</table>
+		<p>Adj. R-squared: {{linear_regression_results | get_item:"Adj. R-squared"}}</p>
+		<p>Test Data Score: {{linear_regression_results | get_item:"Test data score"}}</p>
+		<!-- Linear Regression -->
+
+		<!-- Decision Tree Regressor -->
+			<h5>Decision Tree Regressor</h5>
+			<p>Train Score</p>
+			{{decision_tree_results | get_item:"train_score"}}
+			<p>Test Score</p>
+			{{decision_tree_results | get_item:"test_score"}}
+		<!-- Decision Tree Regressor -->
+	</div>
+	<!-- results menu -->
+</div>	
+<!-- Main Row Content -->
+{% endblock %}
+
+

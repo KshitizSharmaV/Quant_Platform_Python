@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quantitative Research on Python</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+
+    <!-- Page level plugin CSS-->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+    
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    
+ </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-light bg-light static-top">
+
+      <a class="navbar-brand mr-1" href="index.html">Quantitative Research on Python - Kshitiz Sharma</a>
+
+      <button class="btn btn-link btn-sm order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <div class="input-group-append">
+          </div>
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Home
+           </a>
+        </li>
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Services
+          </a>
+        </li>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          About
+          </a>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/ALM/Tech_Analytics">
+                <i class="fas fa-fw fa-cogs"></i>
+                <span>Technical Analysis</span></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/ALM/Machine_Learning">
+                <i class="fas fa-fw fa-atom"></i>
+                <span>Machine Learning</span></a>
+            </li>
+            
+            <li class="nav-item" >
+              <a class="nav-link" href="/ALM/Time_Series">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Timeseries Analysis</span></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/ALM/Modelling">
+                <i class="fas fa-fw fa-superscript"></i>
+                <span>Modelling</span></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/ALM/Statistical_Analysis">
+                <i class="fa fa-fw fa-calculator"></i>
+                <span>Statistical Analysis</span></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/ALM/Portfolio">
+                <i class="fa fa-fw fa-pie-chart"></i>
+                <span>Portfolio</span></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/ALM/">
+                <i class="fa fa-fw fa-globe"></i>
+                <span>Special Events</span></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/ALM/Unstructured_data">
+                <i class="fa fa-fw fa-database"></i>
+                <span>Unstructured Data</span></a>
+            </li>
+        </ul>
+
+      <div id="content-wrapper">
+        <div class="container-fluid">
+          <!-- Stock Selection Bar -->
+            <div class="row"> 
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="row">
+                      <div class="col-3">
+                        <input type="text" class="form-control input-sm form-control-sm" placeholder="Stock Symbol: 'TSLA'">
+                      </div>
+                      <div class="col-3">
+                        <input type="text" class="form-control form-control-sm" placeholder="Start Date: 'mm/dd/yyyy'">
+                      </div>
+                      <div class="col-3">
+                        <input type="text" class="form-control form-control-sm" placeholder="End Date: 'mm/dd/yyyy'">
+                      </div>
+                      <div class="col-2">
+                        <select class="form-control form-control-sm">
+                            <option value="one">1 M</option>
+                            <option value="two">3 M</option>
+                            <option value="three">6 M</option>
+                            <option value="four">1 Yr</option>
+                            <option value="five">3 Yr</option>
+                            <option value="five">5 Yr</option>
+                            <option value="five">Max</option>
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    </div>
+                 </div>      
+                </div>
+            </div>
+            <hr>
+        <!-- Stock Selection Bar -->
+
+          <!-- Main content goes here -->
+            {% block content %}{% endblock %}
+          <!-- Main content goes here -->
+
+
+        </div>
+        <!-- Container Fluid -->
+       </div>
+        <!-- content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+    
+    <!-- Page level plugin JavaScript-->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>s
+    
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin.min.js' %}"></script>
+  </body>
+
+</html>
